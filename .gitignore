@@ -1,0 +1,37 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+supabase/.temp/
+supabase/.branches/
+work/
+backups/
+backups-remote/
+*.dump
+*.backup
+
+# Personal data, runtime evidence and generated artifacts
+deliverables/
+evidence/
+.agent-teams/
+*.private.json
+*.private.*
+*.log
+*.tmp
+*.pdf
+*.docx
+*.xlsx
+*.csv
+*.zip
+*.dump
+*.backup
+outputs/qa-rollback-*.json
+.github-publish/
+
+# Generated download and secret-store files
+out/
+downloads/
+private-fixtures/
+signing_keys.json
+*.pgpass

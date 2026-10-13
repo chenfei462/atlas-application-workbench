@@ -1,0 +1,44 @@
+{
+  "name": "atlas-database-foundation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test tests/*.test.js tests/*.test.ts",
+    "test:db": "node scripts/test-database.mjs",
+    "test:integration": "node scripts/test-local-supabase.mjs",
+    "db:start": "supabase start -x realtime,studio,postgres-meta,edge-runtime,logflare,vector,supavisor,imgproxy",
+    "db:stop": "supabase stop",
+    "db:types": "node scripts/generate-types.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "check": "node --check outputs/domain.js",
+    "dev": "vite --mode local-dev",
+    "build": "vite build",
+    "build:local": "vite build --mode local-dev",
+    "preview": "vite preview --mode local-dev",
+    "configure:local": "node scripts/configure-local.mjs",
+    "test:import": "tsx scripts/test-import-sdk.mjs",
+    "test:repositories": "tsx scripts/test-repositories.mjs",
+    "backup": "node scripts/backup.mjs --daily",
+    "backup:remote": "node scripts/backup-remote.mjs",
+    "backup:remote:preflight": "node scripts/backup-remote.mjs --check-config",
+    "backup:integrity": "node scripts/integrity.mjs",
+    "backup:restore-test": "node scripts/restore-test.mjs",
+    "backup:schedule": "powershell -NoProfile -File scripts/install-backup-task.ps1",
+    "security:scan": "node scripts/security-scan.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.12.0",
+    "supabase": "2.120.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3"
+  }
+}

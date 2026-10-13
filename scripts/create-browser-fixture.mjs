@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {createClient} from '@supabase/supabase-js';
+const root=path.resolve(import.meta.dirname,'..');
+const result=spawnSync(process.execPath,[path.join(root,'node_modules/supabase/dist/supabase.js'),'status','--output','json'],{cwd:root,encoding:'utf8'});if(result.status!==0)throw Error('Local stack unavailable');
+const settings=JSON.parse(result.stdout);if(settings.API_URL!=='http://127.0.0.1:55421')throw Error('Unexpected local API');
+const email=`atlas-browser-${crypto.randomUUID()}@example.invalid`;const password=crypto.randomBytes(24).toString('base64url')+'Aa!';
+const client=createClient(settings.API_URL,settings.ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+const signup=await client.auth.signUp({email,password});if(signup.error||!signup.data.user)throw Error('Fake signup failed');
+await fs.mkdir(path.join(root,'work'),{recursive:true});await fs.writeFile(path.join(root,'work/browser-fixture.json'),JSON.stringify({email,password,owner:signup.data.user.id}));await fs.writeFile(path.join(root,'work/atlas-test.pdf'),'%PDF-1.4\nAtlas harmless UI test only\n%%EOF');
+console.log('Disposable browser test user and harmless PDF prepared in ignored work/');

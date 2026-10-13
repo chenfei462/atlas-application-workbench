@@ -1,0 +1,11 @@
+import { spawnSync } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');
+const binary=path.join(root,'node_modules/supabase/dist/supabase.js');
+const result=spawnSync(process.execPath,[binary,'gen','types','typescript','--local','--schema','public'],{cwd:root,encoding:'utf8',maxBuffer:10*1024*1024});
+if(result.status!==0) throw new Error(result.stderr || 'Type generation failed');
+if(!result.stdout.includes('export type Database')) throw new Error('Invalid generated types');
+mkdirSync(path.join(root,'types'),{recursive:true});
+writeFileSync(path.join(root,'types/database.types.ts'),result.stdout);
+console.log('Generated types/database.types.ts from the running local database');

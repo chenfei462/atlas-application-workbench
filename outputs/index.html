@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas · 港新硕士申请工作台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="authGate" class="atlas-auth" aria-live="polite"><div class="panel"><span class="eyebrow">ATLAS · PRIVATE WORKSPACE</span><h1>登录申请工作台</h1><p id="authStatus">正在恢复登录…</p><form id="loginForm" hidden><label class="atlas-field">邮箱<input type="email" name="email" autocomplete="username" required /></label><label class="atlas-field">密码<input type="password" name="password" autocomplete="current-password" required /></label><button id="loginButton" type="submit" class="primary-button">登录</button></form><form id="registrationForm" hidden><label class="atlas-field">显示名称<input name="displayName" autocomplete="nickname" required /></label><label class="atlas-field">邮箱<input type="email" name="email" autocomplete="username" required /></label><label class="atlas-field">设置密码<input type="password" name="password" autocomplete="new-password" minlength="12" placeholder="至少 12 位密码" required /></label><label class="atlas-field">确认密码<input type="password" name="confirmation" autocomplete="new-password" minlength="12" required /></label><button id="registrationButton" type="submit" class="primary-button">创建个人账号</button></form><button class="outline-button" id="showRegistration" hidden>第一次使用？创建个人账号</button><button class="text-button" id="retryLoad">重新加载</button></div></section>
+    <div class="app-shell" hidden>
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">A</div>
+          <div>
+            <div class="brand-name">atlas</div>
+            <div class="brand-sub">application studio</div>
+          </div>
+        </div>
+
+        <div class="workspace-switcher">
+          <div class="avatar">我</div>
+          <div class="workspace-copy">
+            <strong>我的申请工作台</strong>
+            <span>私有申请工作台</span>
+          </div>
+          <span class="chevron">⌄</span>
+        </div>
+
+        <nav class="main-nav" aria-label="主导航">
+          <button class="nav-item active" data-view="overview"><span class="nav-icon">◈</span> 总览 <span class="nav-count">0</span></button>
+          <button class="nav-item" data-view="programs"><span class="nav-icon">⌁</span> 项目探索</button>
+          <button class="nav-item" data-view="materials"><span class="nav-icon">▤</span> 材料中心 <span class="nav-dot"></span></button>
+          <button class="nav-item" data-view="essays"><span class="nav-icon">✎</span> 文书工作台</button>
+          <button class="nav-item" data-view="timeline"><span class="nav-icon">◫</span> 申请进度</button>
+          <button class="nav-item" data-view="execution"><span class="nav-icon">▣</span> 申请执行</button>
+        </nav>
+
+        <div class="sidebar-label">工作台</div>
+        <nav class="secondary-nav">
+          <button class="nav-item" data-view="profile"><span class="nav-icon">◎</span> 我的画像</button>
+          <button class="nav-item" data-view="sharing"><span class="nav-icon">♧</span> 数据与备份</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="source-status"><span class="status-pulse"></span><div><strong>私有资料库</strong><small id="sourceCount">正在加载来源</small></div></div>
+          <div class="data-mode"><span>DATABASE</span><small>账号数据 · 可导出</small></div>
+          <button class="settings-button" id="exportButton"><span>⇩</span> 导出备份</button>
+          <button class="settings-button" id="importButton"><span>⇧</span> 导入备份</button>
+          <input type="file" id="importFile" accept="application/json" hidden />
+          <div class="user-mini"><div class="avatar small">我</div><div><strong id="accountName">我的账号</strong><small>个人账号</small></div><span class="more">•••</span></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>我的申请</span><b>/</b><strong id="breadcrumb-current">总览</strong></div>
+          <div class="top-actions"><span id="stateLabel" role="status">AUTH_LOADING</span><button class="share-button" id="signOut">退出登录</button></div>
+        </header>
+
+        <section class="view active" id="view-overview"></section>
+        <section class="view" id="view-programs"></section>
+        <section class="view" id="view-materials"></section>
+        <section class="view" id="view-essays"></section>
+        <section class="view" id="view-timeline"></section>
+        <section class="view" id="view-profile"></section>
+        <section class="view" id="view-sharing"></section>
+        <section class="view" id="view-execution"></section>
+      </main>
+    </div>
+    <div class="toast" id="toast"><span>✓</span><span id="toastText">已完成</span></div>
+    <script type="module" src="../src/main.ts"></script>
+  </body>
+</html>
